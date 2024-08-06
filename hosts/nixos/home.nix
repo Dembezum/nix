@@ -4,6 +4,7 @@
 # -- IMPORTS --
   imports = [
     ../../modules/user/tmux
+#    ../../modules/user/nixvim
   ];
 
 # -- USER SETTINGS --

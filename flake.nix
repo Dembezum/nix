@@ -6,16 +6,13 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-    inputs.nixvim = { url = "github:nix-community/nixvim"; inputs.nixpkgs.follows = "nixpkgs";
     };
-  };
 
   outputs = { 
     self, 
     nixpkgs, 
     home-manager, 
     nixos-wsl,
-    nixvim,
     ... }@inputs: let 
 
     # --- SYSTEM CONFIGURATION ---
@@ -39,7 +36,6 @@
       homestate = "23.11";
     };
 
-
     lib = nixpkgs.lib;
     pkgs = nixpkgs.legacyPackages.${systemSettings.system};
 
@@ -51,7 +47,7 @@ in {
           ./hosts/${systemSettings.host}/configuration.nix
           nixos-wsl.nixosModules.default
           home-manager.nixosModules.home-manager
-	  inputs.nixvim.homeManagerModules.nixvim
+	  inputs.home-manager.nixosModules.default
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
@@ -59,7 +55,9 @@ in {
           }
         ];
         specialArgs = {
-          inherit systemSettings userSettings inputs;
+          inherit systemSettings;
+          inherit userSettings;
+	  inherit inputs;
         };
       };
     };

@@ -33,7 +33,7 @@
 	  nixd.enable = true;
 	  zls.enable = true;
 	  clang.enable = true;
-	  bash.enable = true
+	  bash.enable = true;
 	};
       };
 

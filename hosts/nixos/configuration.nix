@@ -1,11 +1,10 @@
 { systemSettings, userSettings, pkgs, ... }:
 
-# --- VPN CONFIGURATION ---
 {
   imports = [
     ../../universal.nix
       ../../modules/system/ssh
-      nixos-wsl
+    nixos-wsl.nixosModules.wsl
   ];
 
   environment.systemPackages = [ 
@@ -14,7 +13,7 @@
 
   wsl = {
     enable = true;
-    automountPath = "/mnt";
+#    automountPath = "/mnt";
     defaultUser = "nixos";
     startMenuLaunchers = true;
 };

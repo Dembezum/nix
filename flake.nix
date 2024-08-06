@@ -5,26 +5,28 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
   };
 
   outputs = { 
     self, 
     nixpkgs, 
     home-manager, 
+    nixos-wsl,
     ... }@inputs: let 
 
     # --- SYSTEM CONFIGURATION ---
     systemSettings = {
       system = "x86_64-linux";
-      host = "nixkube1";
-      hostname = "nixkube1";
-      systemstate = "23.11";
+      host = "nixos";
+      hostname = "nixos";
+      systemstate = "24.05";
     };
 
     # --- USER CONFIGURATION ---
     userSettings = {
-      username = "nixkube1";
-      name = "nixkube1";
+      username = "nixos";
+      name = "nixos";
       editor = "nvim";
       term = "xterm-256color";
       terminal = "foot";
@@ -44,6 +46,7 @@ in {
         system = systemSettings.system;
         modules = [
           ./hosts/${systemSettings.host}/configuration.nix
+          nixos-wsl.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

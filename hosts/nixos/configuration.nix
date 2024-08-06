@@ -4,7 +4,6 @@
   imports = [
     ../../universal.nix
       ../../modules/system/ssh
-  #  nixos-wsl.nixosModules.wsl
   ];
 
   environment.systemPackages = with pkgs; [ 
@@ -18,8 +17,6 @@
     defaultUser = "nixos";
     startMenuLaunchers = true;
 };
-
-
 
   programs.neovim = {
     enable = true;
@@ -41,8 +38,6 @@
     };
   };
 
-#  boot.loader.grub.devices = [ "/dev/xvda" ];
-
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = userSettings.name;
@@ -54,17 +49,11 @@
     hostName = systemSettings.hostname;
     interfaces = {
       ens18 = {
-        useDHCP = false;
-        ipv4.addresses = [ {
-          address = "10.0.40.123";
-          prefixLength = 24;
-        } ];
+        useDHCP = true;
       };
     };
-    defaultGateway = "10.0.40.1";
     nameservers = [ "1.1.1.1" ];
   };
 
-  services.qemuGuest.enable = true;
   system.stateVersion = systemSettings.systemstate;
 }

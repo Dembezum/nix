@@ -6,6 +6,8 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    inputs.nixvim = { url = "github:nix-community/nixvim"; inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { 
@@ -13,6 +15,7 @@
     nixpkgs, 
     home-manager, 
     nixos-wsl,
+    nixvim,
     ... }@inputs: let 
 
     # --- SYSTEM CONFIGURATION ---
@@ -48,6 +51,7 @@ in {
           ./hosts/${systemSettings.host}/configuration.nix
           nixos-wsl.nixosModules.default
           home-manager.nixosModules.home-manager
+	  inputs.nixvim.homeManagerModules.nixvim
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;

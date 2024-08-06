@@ -4,16 +4,17 @@
   imports = [
     ../../universal.nix
       ../../modules/system/ssh
-    nixos-wsl.nixosModules.wsl
+  #  nixos-wsl.nixosModules.wsl
   ];
 
-  environment.systemPackages = [ 
-    pkgs.tailscale 
+  environment.systemPackages = with pkgs; [ 
+	  git
+	  neovim
+	  vim 
   ];
 
   wsl = {
     enable = true;
-#    automountPath = "/mnt";
     defaultUser = "nixos";
     startMenuLaunchers = true;
 };

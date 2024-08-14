@@ -1,19 +1,13 @@
 { systemSettings, userSettings, pkgs, ... }:
 
 {
-  imports = [
-    ../../universal.nix
-      ../../modules/system/ssh
-  ];
-
-  environment.systemPackages = with pkgs; [ 
-  ];
+  imports = [ ../../universal.nix ../../modules/system/ssh ];
 
   wsl = {
     enable = true;
     defaultUser = "nixos";
     startMenuLaunchers = true;
-};
+  };
 
   programs.neovim = {
     enable = true;
@@ -28,10 +22,8 @@
         set cursorline = true
         set virtualedit = "block"
         endif
-        '';
-      packages.myVimPackage = with pkgs.vimPlugins; {
-        start = [ ctrlp ];
-      };
+      '';
+      packages.myVimPackage = with pkgs.vimPlugins; { start = [ ctrlp ]; };
     };
   };
 
@@ -44,12 +36,8 @@
 
   networking = {
     hostName = systemSettings.hostname;
-    interfaces = {
-      ens18 = {
-        useDHCP = true;
-      };
-    };
-    nameservers = [ "1.1.1.1" ];
+    interfaces = { ens18 = { useDHCP = true; }; };
+    #    nameservers = [ "1.1.1.1" ];
   };
 
   system.stateVersion = systemSettings.systemstate;

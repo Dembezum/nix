@@ -1,6 +1,6 @@
-{ userSettings, systemSettings, pkgs, ... }:
+{ lib, userSettings, systemSettings, pkgs, ... }:
 {
-  programs.nixvim = {
+  nixvim = {
     enable = true;
     colorschemes.catppuccin.enable = true;
 

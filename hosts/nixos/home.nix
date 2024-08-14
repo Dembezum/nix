@@ -1,18 +1,18 @@
-{ userSettings, pkgs, ... }:
+{ inputs, userSettings, pkgs, ... }:
 
 {
-# -- IMPORTS --
-  imports = [
-    ../../modules/user/tmux
-    ../../modules/user/nixvim
-  ];
+  # -- IMPORTS --
+  imports = [ ../../modules/user/tmux ../../modules/user/shell ];
 
-# -- USER SETTINGS --
-  home.username = userSettings.username;
-  home.homeDirectory = "/home/"+userSettings.username;
+  # -- USER SETTINGS --
+  home = {
+    username = userSettings.username;
+    homeDirectory = "/home/" + userSettings.username;
+
+  };
   programs.home-manager.enable = true;
 
-# Package configuration
+  # Package configuration
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -20,23 +20,18 @@
     };
   };
 
-# -- DEFAULT PACKAGES --
-  home.packages = with pkgs; [
-  ];
+  # -- DEFAULT PACKAGES --
+  home.packages = with pkgs; [ inputs.nixvim-flake.packages.${system}.default ];
 
-# -- VARIABLES --
+  # -- VARIABLES --
   home.sessionVariables = {
     EDITOR = userSettings.editor;
     TERM = userSettings.term;
     BROWSER = userSettings.browser;
   };
 
-# -- XDG CONFIGURATION --
+  # -- XDG CONFIGURATION --
   xdg.enable = true;
-  xdg.userDirs = {
-    extraConfig = {
-    };
-  };
+  xdg.userDirs = { extraConfig = { }; };
   home.stateVersion = userSettings.homestate;
 }
-

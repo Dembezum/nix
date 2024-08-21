@@ -1,17 +1,15 @@
 { userSettings, pkgs, ... }:
 
 {
-# -- IMPORTS --
-  imports = [
-    ../../modules/user/tmux
-  ];
+  # -- IMPORTS --
+  imports = [ ../../modules/user/tmux ];
 
-# -- USER SETTINGS --
+  # -- USER SETTINGS --
   home.username = userSettings.username;
-  home.homeDirectory = "/home/"+userSettings.username;
+  home.homeDirectory = "/home/" + userSettings.username;
   programs.home-manager.enable = true;
 
-# Package configuration
+  # Package configuration
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -19,23 +17,18 @@
     };
   };
 
-# -- DEFAULT PACKAGES --
-  home.packages = with pkgs; [
-  ];
+  # -- DEFAULT PACKAGES --
+  home.packages = with pkgs; [ ];
 
-# -- VARIABLES --
+  # -- VARIABLES --
   home.sessionVariables = {
     EDITOR = userSettings.editor;
     TERM = userSettings.term;
     BROWSER = userSettings.browser;
   };
 
-# -- XDG CONFIGURATION --
+  # -- XDG CONFIGURATION --
   xdg.enable = true;
-  xdg.userDirs = {
-    extraConfig = {
-    };
-  };
+  xdg.userDirs = { extraConfig = { }; };
   home.stateVersion = userSettings.homestate;
 }
-

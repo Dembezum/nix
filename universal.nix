@@ -13,6 +13,7 @@
       localsend
 # System utilities
       git
+    lazygit
       kmon
       inxi
       tree

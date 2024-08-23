@@ -68,17 +68,17 @@
         banner = "Wassup swagger";
       };
     };
-    flatpak = {
-      enable = true;
-      packages = [ "com.usebottles.bottles" ];
-      update = {
-        onActivation = true;
-        auto = {
-          enable = true;
-          onCalendar = "daily";
-        };
-      };
-    };
+    #    flatpak = {
+    #      enable = true;
+    #      packages = [ "com.usebottles.bottles" ];
+    #      update = {
+    #        onActivation = true;
+    #        auto = {
+    #          enable = true;
+    #          onCalendar = "daily";
+    #        };
+    #      };
+    #    };
   };
 
   # -- XDG --

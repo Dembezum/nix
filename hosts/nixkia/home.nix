@@ -1,6 +1,7 @@
-{ inputs, config, pkgs, userSettings, ... }:
-# Nixdesk
+{ inputs, config, pkgs, userSettings, systemSettings, ... }:
+# Nixkia 
 {
+
   # -- IMPORTS --
   imports = [
     ../../modules/user/gtk
@@ -15,34 +16,38 @@
   ];
 
   # -- USER SETTINGS --
-  home.username = userSettings.username;
-  home.homeDirectory = "/home/${userSettings.username}";
+  home = {
+    username = userSettings.username;
+    homeDirectory = "/home/${userSettings.username}";
+
+    packages = [
+      pkgs.headsetcontrol
+      pkgs.easyeffects
+      pkgs.inkscape
+      pkgs.drawio
+      pkgs.lazygit
+      pkgs.jq
+      pkgs. # sops
+      pkgs. # darktable
+      pkgs.rawtherapee
+      pkgs.imagemagick
+      pkgs.nautilus
+      pkgs.ventoy
+      inputs.nixvim-flake.packages.${systemSettings.system}.default
+    ];
+  };
+
   programs.home-manager.enable = true;
 
   # Package configuration
   nixpkgs = {
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = (_: true);
+      allowUnfreePredicate = _: true;
     };
   };
 
   # -- DEFAULT PACKAGES --
-  home.packages = with pkgs; [
-    headsetcontrol
-    easyeffects
-    inkscape
-    drawio
-    lazygit
-    jq
-    #sops
-    #darktable
-    rawtherapee
-    imagemagick
-    nautilus
-    ventoy
-    inputs.nixvim-flake.packages.${system}.default
-  ];
 
   # -- VARIABLES --
   home.sessionVariables = {
@@ -67,7 +72,7 @@
     documents = "${config.home.homeDirectory}/Documents";
     desktop = null;
     publicShare = null;
-    extraConfig = { XDG_GAME_DIR = "${config.home.homeDirectory}/Games"; };
+        extraConfig = { XDG_GAME_DIR = "${config.home.homeDirectory}/Games"; };
   };
   home.stateVersion = userSettings.homestate;
 }

@@ -1,9 +1,11 @@
-{ config, lib, pkgs, modulesPath, ... }: {
+{ config, lib, pkgs, modulesPath, ... }:
+
+{
+
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  supportedFilesystems = [ "nfs" "ntfs" "vfat" "xfs" ];
-
   boot = {
+    supportedFilesystems = [ "nfs" "ntfs" "vfat" "xfs" ];
     kernelPackages = pkgs.linuxPackages_zen;
     initrd.availableKernelModules =
       [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
@@ -48,6 +50,5 @@
   # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware; 
 }

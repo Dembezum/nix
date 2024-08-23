@@ -1,11 +1,11 @@
 { config, lib, pkgs, modulesPath, ... }: {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  kernelPackages = pkgs.linuxPackages_zen;
   supportedFilesystems = [ "nfs" "ntfs" "vfat" "xfs" ];
 
   boot = {
-    boot.initrd.availableKernelModules =
+    kernelPackages = pkgs.linuxPackages_zen;
+    initrd.availableKernelModules =
       [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
 
     initrd.kernelModules = [ ];

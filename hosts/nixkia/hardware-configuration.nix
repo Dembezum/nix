@@ -1,59 +1,53 @@
-{ pkgs, config, lib, modulesPath, ... }:
-
-{
+{ config, lib, pkgs, modulesPath, ... }: {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot = {
-    initrd = {
-      availableKernelModules = [
-        "nvme" # NVMe support
-        "xhci_pci" # USB 3.0 support
-        "ahci" # AHCI SATA support
-        "usb_storage" # USB storage support
-        "usbhid" # USB Human Interface Devices support
-        "sd_mod" # SCSI disk support
-        "virtio" # Virtualization drivers support
-      ];
-      kernelModules = [ "nvidia" ];
-    };
-    kernelModules = [ "nvidia" "kvm-amd" "nfs" ];
-    extraModulePackages = [ ];
-    supportedFilesystems = [ "nfs" "ntfs" "vfat" "xfs" ];
-    kernelPackages = pkgs.linuxPackages_zen;
-    #    kernelParams = [ "amd_pstate=guided" ];
-  };
-  #  powerManagement.enable = true;
-  #  powerManagement.cpuFreqGovernor = "schedutil";
+  kernelPackages = pkgs.linuxPackages_zen;
+  supportedFilesystems = [ "nfs" "ntfs" "vfat" "xfs" ];
 
-  # File systems configuration
+  boot = {
+    boot.initrd.availableKernelModules =
+      [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+
+    initrd.kernelModules = [ ];
+    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [ ];
+  };
+
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/38b391bf-ffcb-46a0-be81-dd0eea1bcd92";
+      device = "/dev/disk/by-uuid/6ed9ad29-3a6a-4434-af90-4d5cf9d2b9bc";
       fsType = "ext4";
     };
+
     "/boot" = {
-      device = "/dev/disk/by-uuid/DC70-63F7";
+      device = "/dev/disk/by-uuid/3CA2-FE70";
       fsType = "vfat";
     };
-    "/mnt/hdd" = {
-      device = "/dev/disk/by-uuid/f8e3ca98-d2be-4429-9953-ab4bd973bda5";
+
+    "/mnt/extrahdd" = {
+      device = "/dev/disk/by-uuid/423198af-be61-4f36-b479-e98cb264015e";
       fsType = "ext4";
       options = [ "nofail" ];
     };
-    "/mnt/nvme0n1" = {
-      device = "/dev/disk/by-uuid/7243029d-09a7-4948-bc26-e4c8196a8673";
+
+    "/mnt/mintroot" = {
+      device = "/dev/disk/by-uuid/450c5670-9b89-4c6b-bbb1-14b2e3d18549";
       fsType = "ext4";
       options = [ "nofail" ];
     };
-    #"/mnt/nas/Homelab" = {
-    #};
   };
 
-  swapDevices = [ ];
+  swapDevices =
+    [{ device = "/dev/disk/by-uuid/f32378a7-c769-4086-b59d-a3613641c74b"; }];
 
+  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+  # (the default) this is the recommended approach. When using systemd-networkd it's
+  # still possible to use this option, but it's recommended to use it in conjunction
+  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
+  # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode =
+  hardware.cpu.intel.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
-  systemd.enableEmergencyMode = false;
 }

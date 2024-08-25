@@ -11,9 +11,6 @@
 
   outputs = { nixpkgs, home-manager, nixos-wsl, ... }@inputs:
     let
-      pkgs = nixpkgs.legacyPackages.${systemSettings.system};
-
-      # --- SYSTEM CONFIGURATION ---
       systemSettings = {
         system = "x86_64-linux";
         host = "nixkia";
@@ -21,7 +18,6 @@
         systemstate = "23.11";
       };
 
-      # --- USER CONFIGURATION ---
       userSettings = {
         username = "nixkia";
         name = "nixkia";
@@ -33,8 +29,6 @@
         image = "feh";
         homestate = "23.11";
       };
-
-      #      lib = nixpkgs.lib;
 
     in {
       nixosConfigurations = {
@@ -50,17 +44,14 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users.${userSettings.username} =
-                  import ./hosts/${systemSettings.host}/home.nix {
+                  let pkgs = nixpkgs.legacyPackages.${systemSettings.system};
+                  in import ./hosts/${systemSettings.host}/home.nix {
                     inherit inputs pkgs systemSettings userSettings;
                   };
               };
             }
           ];
-          specialArgs = {
-            inherit systemSettings;
-            inherit userSettings;
-            inherit inputs;
-          };
+          specialArgs = { inherit systemSettings userSettings inputs; };
         };
       };
     };

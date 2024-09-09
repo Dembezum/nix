@@ -12,15 +12,16 @@
   outputs = { nixpkgs, home-manager, nixos-wsl, ... }@inputs:
     let
       systemSettings = {
-        system = "x86_64-linux";
-        host = "nixkia";
-        hostname = "nixkia";
+        #system = "x86_64-linux";
+        system = "x86_64-darwin";
+        host = "m3darwin";
+        hostname = "m3darwin";
         systemstate = "23.11";
       };
 
       userSettings = {
-        username = "nixkia";
-        name = "nixkia";
+        username = "m3darwin";
+        name = "m3darwin";
         editor = "nvim";
         term = "xterm-256color";
         terminal = "foot";

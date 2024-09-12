@@ -1,11 +1,13 @@
-{ ... }:
 # SSH setup
 {
   services.openssh = {
     enable = true;
-    settings.PasswordAuthentication = true;
-    settings.KbdInteractiveAuthentication = false;
-    settings.PermitRootLogin = "yes";
-    ports  = [ 22 ];
+    settings = {
+      UseDns = true;
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "yes";
+    };
+    ports = [ 22 ];
   };
 }

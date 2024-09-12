@@ -12,29 +12,28 @@
   outputs = { nixpkgs, home-manager, nixos-wsl, ... }@inputs:
     let
       systemSettings = {
-        #system = "x86_64-linux";
-        system = "x86_64-darwin";
-        host = "m3darwin";
-        hostname = "m3darwin";
-        systemstate = "23.11";
+        system = "x86_64-linux";
+        host = "zumclust0";
+        hostname = "zumclust0";
+        systemstate = "24.05";
       };
 
       userSettings = {
-        username = "m3darwin";
-        name = "m3darwin";
+        username = "zumclust0";
+        name = "zumclust0";
         editor = "nvim";
         term = "xterm-256color";
         terminal = "foot";
         browser = "firefox";
         video = "mpv";
         image = "feh";
-        homestate = "23.11";
+        homestate = "24.05";
       };
 
     in {
       nixosConfigurations = {
         system = nixpkgs.lib.nixosSystem {
-          system = systemSettings.system;
+          inherit (systemSettings) system host hostname;
           modules = [
             ./hosts/${systemSettings.host}/configuration.nix
             nixos-wsl.nixosModules.default

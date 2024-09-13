@@ -2,11 +2,15 @@
 
 {
   # -- IMPORTS --
-  imports = [ ../../modules/user/tmux ../../modules/user/shell ];
+  imports = [
+    ../../modules/user/tmux
+    ../../modules/user/shell
+
+  ];
 
   # -- USER SETTINGS --
   home = {
-    username = userSettings.username;
+    inherit (userSettings) username;
     homeDirectory = "/home/" + userSettings.username;
 
   };
@@ -16,12 +20,16 @@
   nixpkgs = {
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = (_: true);
+      allowUnfreePredicate = true;
     };
   };
 
   # -- DEFAULT PACKAGES --
-  home.packages = with pkgs; [ inputs.nixvim-flake.packages.${system}.default ];
+  home.packages = with pkgs;
+    [
+      inputs.nixvim-flake.packages.${system}.default
+
+    ];
 
   # -- VARIABLES --
   home.sessionVariables = {

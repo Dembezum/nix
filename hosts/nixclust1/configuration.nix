@@ -14,11 +14,11 @@
     variables = {
 
     };
-    systemPackages = with pkgs;
-      [
-        inputs.nixvim-flake.packages.${system}.default
+    systemPackages = with pkgs; [
+      inputs.nixvim-flake.packages.${system}.default
+      dockerCompose
 
-      ];
+    ];
   };
 
   networking = {

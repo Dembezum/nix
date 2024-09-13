@@ -1,4 +1,4 @@
-{ systemSettings, userSettings, pkgs, ... }:
+{ systemSettings, userSettings, ... }:
 
 {
   imports = [ ../../universal.nix ../../modules/system/ssh ];
@@ -7,24 +7,6 @@
     enable = true;
     defaultUser = "nixos";
     startMenuLaunchers = true;
-  };
-
-  programs.neovim = {
-    enable = true;
-    configure = {
-      customRC = ''
-        set cc=80
-        set number
-        set relativenumber
-        set hlsearch = false
-        set incsearch = true
-        set swapfile = false
-        set cursorline = true
-        set virtualedit = "block"
-        endif
-      '';
-      packages.myVimPackage = with pkgs.vimPlugins; { start = [ ctrlp ]; };
-    };
   };
 
   users.users.${userSettings.username} = {

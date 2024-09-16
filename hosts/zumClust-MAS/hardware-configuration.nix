@@ -6,7 +6,7 @@
   boot = {
     kernelModules = [ ];
     extraModulePackages = [ ];
-    intrid = {
+    initrd = {
       availableKernelModules =
         [ "ata_piix" "uhci_hcd" "sr_mod" "xen_blkfront" ];
       kernelModules = [ ];

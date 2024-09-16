@@ -1,4 +1,4 @@
-{ systemSettings, userSettings, pkgs, ... }:
+{ inputs, systemSettings, userSettings, pkgs, ... }:
 
 {
   imports = [
@@ -15,7 +15,7 @@
     variables = { };
     systemPackages = with pkgs; [
       inputs.nixvim-flake.packages.${system}.default
-      dockerCompose
+      docker-compose
 
     ];
   };

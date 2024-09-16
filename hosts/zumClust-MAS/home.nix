@@ -4,13 +4,13 @@
   # -- IMPORTS --
   imports = [
     ../../modules/user/tmux
-    ../../modules/user/shell
+    ../../modules/user/zsh
 
   ];
 
   # -- USER SETTINGS --
   home = {
-    inherit (userSettings) homestate editor term;
+    inherit (userSettings) username;
     homeDirectory = "/home/" + userSettings.username;
 
   };

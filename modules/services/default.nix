@@ -1,7 +1,7 @@
 {
   imports = [
     #    ./dhcp.nix
-    ./librenms.nix
+    #    ./librenms.nix
     ./mediawiki.nix
 
   ];

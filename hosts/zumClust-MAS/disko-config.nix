@@ -1,68 +1,36 @@
-# disko-config
 {
-  imports = [ <nixos-hardware/x86_64/xcp-ng> ];
-
-  disko = {
-    enable = true;
-    devices = {
-      "/dev/xvda" = {
-        partitions = {
-          # Boot partition
-          boot = {
-            start = "0";
-            size = "512MiB";
-            type = "primary";
-            format = {
-              fstype = "ext4";
-              mountPoint = "/boot";
+  disko.devices = {
+    disk = {
+      main = {
+        type = "disk";
+        device = "/dev/xvda";
+        content = {
+          type = "gpt";
+          partitions = {
+            boot = {
+              size = "1M";
+              type = "EF02"; # for grub MBR
             };
-          };
-
-          # Root partition
-          root = {
-            start = "512MiB";
-            size = "100%-4GiB"; # Adjust size to leave space for swap
-            type = "primary";
-            format = {
-              fstype = "ext4";
-              mountPoint = "/";
+            ESP = {
+              size = "512M";
+              type = "EF00";
+              content = {
+                type = "filesystem";
+                format = "vfat";
+                mountpoint = "/boot";
+              };
             };
-          };
-
-          # Swap partition
-          swap = {
-            start = "100%-4GiB";
-            size = "4GiB";
-            type = "primary";
-            format = { fstype = "swap"; };
+            root = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/";
+              };
+            };
           };
         };
       };
     };
   };
-
-  fileSystems = {
-    "/" = {
-      device = "/dev/xvda2";
-      fsType = "ext4";
-    };
-
-    "/boot" = {
-      device = "/dev/xvda1";
-      fsType = "ext4";
-    };
-  };
-
-  swapDevices = [{
-    device = "/dev/xvda3";
-    priority = 1;
-  }];
-
-  # Additional NixOS configuration
-  boot.loader.grub = {
-    enable = true;
-    version = 2;
-    device = "/dev/xvda";
-  };
-
-}
+} # disko-config

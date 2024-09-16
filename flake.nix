@@ -7,6 +7,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nixvim-flake.url = "github:dembezum/nixvim";
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { nixpkgs, home-manager, nixos-wsl, ... }@inputs:
@@ -39,6 +41,7 @@
             nixos-wsl.nixosModules.default
             home-manager.nixosModules.home-manager
             inputs.home-manager.nixosModules.default
+            inputs.disko.nixosModules.disko
             {
               home-manager = {
                 useGlobalPkgs = true;

@@ -41,10 +41,12 @@
     allowedUDPPorts = [ ];
   };
 
-  boot.loader.grub = {
-    enable = true;
-    device = "/dev/xda";
-    useOSProber = true;
+  boot = {
+    loader.grub = {
+      enable = true;
+      efiSupport = true;
+      efiInstallAsRemovable = true;
+    };
   };
 
   users.users.${userSettings.username} = {

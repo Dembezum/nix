@@ -1,8 +1,7 @@
-{ ... }:
-
 {
   imports = [
     ./wireguard.nix
-      ./pihole.nix
+    ./pihole.nix
+
   ];
 }

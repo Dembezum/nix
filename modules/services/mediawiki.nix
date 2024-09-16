@@ -1,14 +1,17 @@
+# MediaWiki
+
 { pkgs, ... }: {
+
   services.mediawiki = {
     enable = true;
-    name = "ZumWiki";
+    name = "zumserveWiki";
     httpd.virtualHost = {
-      hostName = "nixwiki.zumserve.local";
-      adminAddr = "wiki@admin.zumserve.local";
+      hostName = "nixwiki.zumserve.com";
+      adminAddr = "nixwiki@admin.zumserve.com";
     };
 
-    # Administrator account username is admin.
-    passwordFile = pkgs.writeText "password" "mediawikipass";
+    # Single use password 
+    passwordFile = pkgs.writeText "password" "admin";
     extraConfig = ''
       # Disable anonymous editing
             $wgGroupPermissions['*']['edit'] = false;

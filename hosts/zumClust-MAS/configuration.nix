@@ -2,18 +2,17 @@
 
 {
   imports = [
+    ./disko-config.nix
     ../../universal.nix
+    ../../modules/services
     ../../modules/system/ssh
     ../../modules/system/glances
-    ../../modules/system/librenms
-    ../../modules/system/dhcpserver
+    ../../modules/system/virtualization
     ./hardware-configuration.nix
   ];
 
   environment = {
-    variables = {
-
-    };
+    variables = { };
     systemPackages = with pkgs; [
       inputs.nixvim-flake.packages.${system}.default
       dockerCompose
@@ -38,7 +37,7 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 80 81 22 443 3306 22000 ];
+    allowedTCPPorts = [ ];
     allowedUDPPorts = [ ];
   };
 
@@ -51,7 +50,7 @@
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = userSettings.name;
-    extraGroups = [ "plugdev" "networkmanager" "wheel" ];
+    extraGroups = [ "docker" "plugdev" "libvirt" "networkmanager" "wheel" ];
     uid = 1000;
   };
 

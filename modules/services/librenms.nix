@@ -1,9 +1,11 @@
+{ systemSettings, ... }:
+# Librenms
 {
   services.librenms = {
     enable = true;
     user = "librenms";
     group = "librenms";
-    hostname = "librenms.zum.local";
+    hostname = "${systemSettings.hostname}.zumserve.com";
     dataDir = "/var/lib/librenms";
     logDir = "/var/log/librenms";
 

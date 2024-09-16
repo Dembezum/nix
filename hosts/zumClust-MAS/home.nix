@@ -24,11 +24,11 @@
     };
   };
 
-  # -- HOME PACKAGES --
-  #  home.packages = with pkgs;
-  #    [
-  #
-  #    ];
+  home.packages = with pkgs;
+    [
+      jq
+
+    ];
 
   # -- VARIABLES --
   home.sessionVariables = {

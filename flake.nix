@@ -13,14 +13,14 @@
     let
       systemSettings = {
         system = "x86_64-linux";
-        host = "zumclust0";
-        hostname = "zumclust0";
+        host = "zumClust-MAS";
+        hostname = "zumClust-MAS";
         systemstate = "24.05";
       };
 
       userSettings = {
-        username = "zumclust0";
-        name = "zumclust0";
+        username = "zumClust-MAS";
+        name = "zumClust-MAS";
         editor = "nvim";
         term = "xterm-256color";
         terminal = "foot";
@@ -33,7 +33,7 @@
     in {
       nixosConfigurations = {
         system = nixpkgs.lib.nixosSystem {
-          inherit (systemSettings) system host hostname;
+          inherit (systemSettings) system;
           modules = [
             ./hosts/${systemSettings.host}/configuration.nix
             nixos-wsl.nixosModules.default

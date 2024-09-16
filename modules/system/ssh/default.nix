@@ -10,4 +10,9 @@
     };
     ports = [ 22 ];
   };
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 22 ];
+  };
 }

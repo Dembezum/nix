@@ -23,7 +23,7 @@
   networking = {
     hostName = systemSettings.hostname;
     interfaces = {
-      ens18 = {
+      enX0 = {
         useDHCP = false;
         ipv4.addresses = [{
           address = "10.0.40.10";

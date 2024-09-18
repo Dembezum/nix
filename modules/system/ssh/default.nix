@@ -4,7 +4,7 @@
     enable = true;
     settings = {
       UseDns = true;
-      PasswordAuthentication = false;
+      PasswordAuthentication = true;
       KbdInteractiveAuthentication = false;
       PermitRootLogin = "yes";
     };

@@ -18,6 +18,7 @@
     systemPackages = with pkgs; [
       inputs.nixvim-flake.packages.${system}.default
       docker-compose
+      xe-guest-utilities
 
     ];
   };
@@ -28,7 +29,7 @@
       enX0 = {
         useDHCP = false;
         ipv4.addresses = [{
-          address = "10.0.40.10";
+          address = "10.0.40.100";
           prefixLength = 24;
         }];
       };
@@ -43,19 +44,26 @@
     allowedUDPPorts = [ ];
   };
 
-    boot = {
-      loader.grub = {
-        devices = [ "/dev/xvda" ];
-        enable = true;
-        efiSupport = true;
-        efiInstallAsRemovable = true;
-      };
+  boot = {
+    loader.grub = {
+      devices = [ "/dev/xvda" ];
+      enable = true;
+      efiSupport = true;
+      efiInstallAsRemovable = true;
     };
+  };
 
   users.users.${userSettings.username} = {
-    isNormalUser = true;
     description = userSettings.name;
+    isNormalUser = true;
+    initialPassword = "frysepizza";
     extraGroups = [ "docker" "plugdev" "libvirt" "networkmanager" "wheel" ];
+    openssh.authorizedKeys.keys = [''
+      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIObwpxQ2jEJLHmwx6hBHbhveBs7UWeM31JdUH7vkPcVM dembezuuma@gmail.com
+    '' # content of authorized_keys file
+      # note: ssh-copy-id will add user@your-machine after the public key
+      # but we can remove the "@your-machine" part
+      ];
     uid = 1000;
   };
 

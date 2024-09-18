@@ -15,14 +15,14 @@
     let
       systemSettings = {
         system = "x86_64-linux";
-        host = "zumClust-MAS";
-        hostname = "zumClust-MAS";
+        host = "zumClust-SLA2";
+        hostname = "zumClust-SLA2";
         systemstate = "24.05";
       };
 
       userSettings = {
-        username = "zumClust-MAS";
-        name = "zumClust-MAS";
+        username = "zumClust-SLA2";
+        name = "zumClust-SLA2";
         editor = "nvim";
         term = "xterm-256color";
         terminal = "foot";

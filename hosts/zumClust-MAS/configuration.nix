@@ -11,6 +11,8 @@
     ./hardware-configuration.nix
   ];
 
+  nix.distributedBuilds = true;
+
   environment = {
     variables = { };
     systemPackages = with pkgs; [

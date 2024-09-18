@@ -4,7 +4,6 @@
   # -- IMPORTS --
   imports = [
     ../../modules/user/tmux
-    ../../modules/user/shell
 
   ];
 

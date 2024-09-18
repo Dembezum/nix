@@ -12,6 +12,7 @@
   ];
 
   nix.distributedBuilds = true;
+  services.xe-guest-utilities.enable = true;
 
   environment = {
     variables = { };

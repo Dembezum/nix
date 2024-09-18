@@ -1,9 +1,9 @@
 # Pihole
 {
-  systemd.tmpfiles.rules = [ "d /configs/pihole/etc 0755 nixnet nixnet -" ];
+  systemd.tmpfiles.rules = [ "d /configs/pihole/etc 0755 zumnet zumnet -" ];
 
   # The - disables automatic cleanup, so the file wont be removed after a
-  # period "d /configs/pihole/etc-dnsmasq.d 0755 nixnet nixnet -" # The -
+  # period "d /configs/pihole/etc-dnsmasq.d 0755 zumnet zumnet -" # The -
   # disables automatic cleanup, so the file wont be removed after a period
   virtualisation.oci-containers.containers = {
     pihole = {

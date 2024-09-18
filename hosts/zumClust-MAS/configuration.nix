@@ -18,7 +18,6 @@
     variables = { };
     systemPackages = with pkgs; [
       inputs.nixvim-flake.packages.${system}.default
-      docker-compose
       xe-guest-utilities
 
     ];

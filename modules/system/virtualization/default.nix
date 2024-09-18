@@ -22,6 +22,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    docker
+    docker-compose
     virt-manager
     virt-viewer
     win-spice

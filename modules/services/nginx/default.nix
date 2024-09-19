@@ -1,5 +1,5 @@
 {
-  networking.firewall.allowedTCPPorts = [ 90 91 ];
+  networking.firewall.allowedTCPPorts = [ 90 91 8443 443 ];
   security.acme = {
     acceptTerms = true;
     defaults.email = "dembezuuma@gmail.com";
@@ -31,7 +31,7 @@
         serverName = "zumserve.com";
         root = "/sites/zumserve.com/src/public";
         listen = [{
-          port = 90;
+          port = 8443;
           addr = "0.0.0.0";
         }];
         locations."/.well-known/acme-challenge/" = {

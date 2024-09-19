@@ -4,20 +4,18 @@
   imports = [
     ./disko-config.nix
     ../../universal.nix
+    ../../modules/system
     ../../modules/services
-    ../../modules/system/ssh
-    ../../modules/system/glances
-    ../../modules/system/virtualization
     ./hardware-configuration.nix
   ];
 
   nix.distributedBuilds = true;
+  services.xe-guest-utilities.enable = true;
 
   environment = {
     variables = { };
     systemPackages = with pkgs; [
       inputs.nixvim-flake.packages.${system}.default
-      docker-compose
       xe-guest-utilities
 
     ];

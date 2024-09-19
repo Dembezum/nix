@@ -3,6 +3,7 @@
 {
   imports = [
     ./disko-config.nix
+    ./keepalived.nix
     ../../universal.nix
     ../../modules/system
     ../../modules/services

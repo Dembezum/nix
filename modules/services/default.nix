@@ -3,7 +3,7 @@
     #    ./dhcp.nix
     #    ./mediawiki.nix
     #    ./containers
-    #    ./nginx
+    ./nginx
     ./tailscale
 
   ];

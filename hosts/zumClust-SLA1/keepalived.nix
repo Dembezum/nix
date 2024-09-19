@@ -13,12 +13,13 @@ let
         auth_pass 1234
       }
       virtual_ipaddress {
-        10.0.41.100
+        10.0.41.102
       }
     }
   '';
 in {
 
+  services.keepalived.openFirewall = true;
   environment.systemPackages = with pkgs; [ keepalived ];
 
   environment.etc."keepalived/keepalived.conf".text = keepalivedConfig;

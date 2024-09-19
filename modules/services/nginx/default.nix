@@ -32,7 +32,7 @@
         serverName = "zumserve.com";
         root = "/sites/zumserve.com/src/public";
         listen = [{
-          port = 443;
+          port = 90;
           addr = "0.0.0.0";
         }];
 

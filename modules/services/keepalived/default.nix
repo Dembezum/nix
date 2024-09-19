@@ -1,13 +1,25 @@
-{
-  services.keepalived = {
-    openFirewall = true;
-    vrrpInstances.test = {
-      interface = "enX0";
-      state = "MASTER";
-      priority = 50;
-      virtualIps = [{ addr = "10.0.41.100"; }];
-      virtualRouterId = 1;
-    };
+{ pkgs, ... }:
 
-  };
+let
+  keepalivedConfig = ''
+    vrrp_instance VI_1 {
+      state MASTER
+      interface enX0
+      virtual_router_id 51
+      priority 100
+      advert_int 1
+      authentication {
+        auth_type PASS
+        auth_pass 1234
+      }
+      virtual_ipaddress {
+        10.0.41.100
+      }
+    }
+  '';
+in {
+
+  environment.systemPackages = with pkgs; [ keepalived ];
+
+  environment.etc."keepalived/keepalived.conf".text = keepalivedConfig;
 }

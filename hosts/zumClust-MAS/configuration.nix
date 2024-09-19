@@ -4,10 +4,8 @@
   imports = [
     ./disko-config.nix
     ../../universal.nix
+    ../../modules/system
     ../../modules/services
-    ../../modules/system/ssh
-    ../../modules/system/glances
-    ../../modules/system/virtualization
     ./hardware-configuration.nix
   ];
 

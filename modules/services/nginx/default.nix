@@ -11,6 +11,7 @@
       };
     };
   };
+
   services.nginx = {
     enable = true;
     virtualHosts = {
@@ -31,16 +32,21 @@
         serverName = "zumserve.com";
         root = "/sites/zumserve.com/src/public";
         listen = [{
-          port = 8443;
+          port = 443;
           addr = "0.0.0.0";
         }];
+
         locations."/.well-known/acme-challenge/" = {
           root = "/sites/zumserve.com/src/public";
-
         };
 
         locations."/" = {
+          root = "/sites/zumserve.com/src/public";
+          proxyPass = "http://127.0.0.1:90";
           extraConfig = ''
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             index index.html;
           '';
         };

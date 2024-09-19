@@ -1,9 +1,10 @@
-{ userSettings, pkgs, ... }:
+{ inputs, userSettings, pkgs, ... }:
 
 {
   # -- IMPORTS --
   imports = [
     ../../modules/user/tmux
+    ../../modules/user/zsh
 
   ];
 

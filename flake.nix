@@ -14,10 +14,10 @@
   outputs = { nixpkgs, home-manager, nixos-wsl, ... }@inputs:
     let
       systemSettings = {
-        system = "x86_64-linux";
-        host = "zumClust-MAS";
-        hostname = "zumClust-MAS";
         systemstate = "24.05";
+        host = "zumClust-MAS";
+        system = "x86_64-linux";
+        hostname = "${systemSettings.host}";
       };
 
       userSettings = {

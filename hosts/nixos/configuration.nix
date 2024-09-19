@@ -1,7 +1,11 @@
 { systemSettings, userSettings, ... }:
 
 {
-  imports = [ ../../universal.nix ../../modules/system/ssh ];
+  imports = [
+    ../../universal.nix
+    ../../modules/system/ssh
+
+  ];
 
   wsl = {
     enable = true;

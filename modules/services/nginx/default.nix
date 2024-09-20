@@ -5,7 +5,8 @@
     defaults.email = "dembezuuma@gmail.com";
     certs = {
       "zumserve.com" = {
-        webroot = "/sites/zumserve.com/src/public";
+        webroot =
+          "/sites/zumserve.com/src/public"; # Ensure this path exists and is writable
         email = "dembezuuma@gmail.com";
         domain = "www.zumserve.com";
       };
@@ -31,13 +32,20 @@
       "zumserve.com" = {
         serverName = "zumserve.com";
         root = "/sites/zumserve.com/src/public";
-        listen = [{
-          port = 443;
-          addr = "0.0.0.0";
-        }];
+        listen = [
+          {
+            port = 80; # Ensure port 80 is open for HTTP challenge
+            addr = "0.0.0.0";
+          }
+          {
+            port = 443; # Ensure port 443 is open for HTTPS
+            addr = "0.0.0.0";
+          }
+        ];
 
         locations."/.well-known/acme-challenge/" = {
-          root = "/sites/zumserve.com/src/public";
+          root =
+            "/sites/zumserve.com/src/public"; # Ensure this path exists and is writable
         };
 
         locations."/" = {

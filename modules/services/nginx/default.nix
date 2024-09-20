@@ -1,4 +1,11 @@
-{
+{ pkgs, ... }: {
+
+  environment.systemPackages = with pkgs; [
+    nginx
+    certbot
+
+  ];
+
   networking.firewall.allowedTCPPorts = [ 80 90 91 8443 443 ];
   security.acme = {
     acceptTerms = true;
@@ -9,6 +16,7 @@
           "/sites/zumserve.com/src/public"; # Ensure this path exists and is writable
         email = "dembezuuma@gmail.com";
         domain = "www.zumserve.com";
+        extraDomainNames = [ "www.zumserve.com" ];
       };
     };
   };
@@ -16,25 +24,13 @@
   services.nginx = {
     enable = true;
     virtualHosts = {
-      "dev.zumserve.com" = {
-        serverName = "dev.zumserve.com";
-        root = "/sites/dev.zumserve.com/src/public";
-        listen = [{
-          port = 91;
-          addr = "0.0.0.0";
-        }];
-        locations."/" = {
-          extraConfig = ''
-            index index.html;
-          '';
-        };
-      };
       "zumserve.com" = {
         serverName = "zumserve.com";
         root = "/sites/zumserve.com/src/public";
         listen = [
           {
-            port = 80; # Ensure port 80 is open for HTTP challenge
+            port =
+              80; # Ensure port 80 is open for HTTP challenge addr = "0.0.0.0";
             addr = "0.0.0.0";
           }
           {
@@ -50,7 +46,7 @@
 
         locations."/" = {
           root = "/sites/zumserve.com/src/public";
-          proxyPass = "http://127.0.0.1:90";
+          proxyPass = "https://127.0.0.1:443";
           extraConfig = ''
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;

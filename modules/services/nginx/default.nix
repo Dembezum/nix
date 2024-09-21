@@ -37,7 +37,7 @@
 
         locations."/" = {
           root = "/sites/zumserve.com/src/public";
-          proxyPass = "http://10.0.40.100:8080";
+          proxyPass = "http://10.0.40.100:80";
           extraConfig = ''
             index index.html;
             proxy_set_header Host $host;

@@ -28,7 +28,7 @@
         root = "/sites/zumserve.com/src/public";
         listen = [{
           port = 80;
-          addr = "10.0.40.100";
+          addr = "10.0.40.101";
         }];
 
         locations."/.well-known/acme-challenge/" = {
@@ -37,13 +37,7 @@
 
         locations."/" = {
           root = "/sites/zumserve.com/src/public";
-          #          proxyPass = "http://10.0.40.100:80";
-          #extraConfig = ''
-          #  index index.html;
-          #  proxy_set_header Host $host;
-          #  proxy_set_header X-Real-IP $remote_addr;
-          #  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          #'';
+
         };
       };
     };

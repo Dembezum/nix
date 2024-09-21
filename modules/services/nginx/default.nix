@@ -14,7 +14,7 @@
       "zumserve.com" = {
         webroot = "/sites/zumserve.com/src/public";
         email = "dembezuuma@gmail.com";
-        domain = "www.zumserve.com";
+        domain = "zumserve.com";
         extraDomainNames = [ "www.zumserve.com" ];
       };
     };
@@ -37,9 +37,9 @@
 
         locations."/" = {
           root = "/sites/zumserve.com/src/public";
-          proxyPass = "http://10.0.40.100:80";
-          index = "index.html";
+          proxyPass = "http://10.0.40.100:8080";
           extraConfig = ''
+            index index.html;
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;

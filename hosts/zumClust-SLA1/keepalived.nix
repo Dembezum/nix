@@ -2,7 +2,7 @@
 
 let
   keepalivedConfig = ''
-    vrrp_instance VI_2 {
+    vrrp_instance VI_1 {
       state MASTER
       interface enX0
       virtual_router_id 51
@@ -13,7 +13,7 @@ let
         auth_pass 1234
       }
       virtual_ipaddress {
-        10.0.41.102
+        10.0.40.101
       }
     }
   '';

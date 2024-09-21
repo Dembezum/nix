@@ -12,8 +12,7 @@
     defaults.email = "dembezuuma@gmail.com";
     certs = {
       "zumserve.com" = {
-        webroot =
-          "/sites/zumserve.com/src/public"; # Ensure this path exists and is writable
+        webroot = "/sites/zumserve.com/src/public";
         email = "dembezuuma@gmail.com";
         domain = "www.zumserve.com";
         extraDomainNames = [ "www.zumserve.com" ];
@@ -33,13 +32,12 @@
         }];
 
         locations."/.well-known/acme-challenge/" = {
-          root =
-            "/sites/zumserve.com/src/public"; # Ensure this path exists and is writable
+          root = "/sites/zumserve.com/src/public";
         };
 
         locations."/" = {
           root = "/sites/zumserve.com/src/public";
-          proxyPass = "http://10.0.40.101:8080";
+          proxyPass = "http://10.0.40.101:90";
           index = "index.html";
           extraConfig = ''
             proxy_set_header Host $host;

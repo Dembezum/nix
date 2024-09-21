@@ -28,8 +28,8 @@
         serverName = "zumserve.com";
         root = "/sites/zumserve.com/src/public";
         listen = [{
-          port = 8080;
-          addr = "0.0.0.0";
+          port = 80;
+          addr = "10.0.40.101";
         }];
 
         locations."/.well-known/acme-challenge/" = {
@@ -39,7 +39,7 @@
 
         locations."/" = {
           root = "/sites/zumserve.com/src/public";
-          proxyPass = "http://127.0.0.1:8080";
+          proxyPass = "http://10.0.40.101:8080";
           index = "index.html";
           extraConfig = ''
             proxy_set_header Host $host;

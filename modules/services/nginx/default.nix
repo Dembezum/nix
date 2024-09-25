@@ -2,43 +2,62 @@
 
   environment.systemPackages = with pkgs; [
     nginx
-    certbot
+    openssl
 
   ];
 
-  networking.firewall.allowedTCPPorts = [ 80 8080 90 91 8443 443 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
+
   security.acme = {
     acceptTerms = true;
     defaults.email = "dembezuuma@gmail.com";
     certs = {
       "zumserve.com" = {
-        webroot = "/sites/zumserve.com/src/public";
+        webroot = "/var/lib/acme/challenges-zumserve";
         email = "dembezuuma@gmail.com";
+        group = "nginx";
         domain = "zumserve.com";
         extraDomainNames = [ "www.zumserve.com" ];
       };
     };
   };
 
+  users.users.nginx.extraGroups = [ "acme" ];
+
   services.nginx = {
     enable = true;
+    logError = "stderr info";
     virtualHosts = {
+
       "zumserve.com" = {
-        serverName = "zumserve.com";
-        root = "/sites/zumserve.com/src/public";
+        addSSL = true;
+        useACMEHost = "zumserve.com";
+        serverAliases = [ "*.zumserve.com" ];
+        acmeRoot = "/var/lib/acme/challenges-zumserve";
+        locations."/" = { root = "/sites/zumserve.com/src/public"; };
         listen = [{
-          port = 80;
           addr = "10.0.40.101";
+          port = 443;
+          ssl = true;
         }];
+      };
 
-        locations."/.well-known/acme-challenge/" = {
-          root = "/sites/zumserve.com/src/public";
+      "zumserve.com80" = {
+        serverName = "zumserve.com";
+        serverAliases = [ "*.zumserve.com" ];
+        locations."/.well-known/acme-challenge" = {
+          root = "/var/lib/acme/challenges-zumserve";
+          extraConfig = ''
+            auth_basic off;
+          '';
         };
+        #locations."/" = { return = "301 https://$host$request_uri"; };
+        locations."/" = { root = "/sites/zumserve.com/src/public"; };
 
-        locations."/" = {
-          root = "/sites/zumserve.com/src/public";
-
-        };
+        listen = [{
+          addr = "10.0.40.101";
+          port = 80;
+        }];
       };
     };
   };

@@ -34,7 +34,18 @@
         useACMEHost = "zumserve.com";
         serverAliases = [ "*.zumserve.com" ];
         acmeRoot = "/var/lib/acme/challenges-zumserve";
-        locations."/" = { root = "/sites/zumserve.com/src/public"; };
+        locations."/" = {
+          root = "/sites/zumserve.com/src/public";
+          extraConfig = ''
+            # Limit request methods
+            if ($request_method !~ ^(GET|POST|HEAD)$ ) {
+              return 444;
+            }
+
+            # Hide Nginx version
+            server_tokens off;
+          '';
+        };
         listen = [{
           addr = "10.0.40.101";
           port = 443;
@@ -49,6 +60,14 @@
           root = "/var/lib/acme/challenges-zumserve";
           extraConfig = ''
             auth_basic off;
+
+            # Limit request methods
+            if ($request_method !~ ^(GET|POST|HEAD)$ ) {
+              return 444;
+            }
+
+            # Hide Nginx version
+            server_tokens off;
           '';
         };
         #locations."/" = { return = "301 https://$host$request_uri"; };

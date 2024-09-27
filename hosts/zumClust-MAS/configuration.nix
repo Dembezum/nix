@@ -1,7 +1,6 @@
-{ inputs, userSettings, pkgs, ... }:
+{ inputs, systemSettings, userSettings, pkgs, ... }:
 
-let systemSettings = { host = "zumClust-MAS"; };
-in {
+{
   imports = [
     ./disko-config.nix
     ./keepalived.nix
@@ -9,7 +8,6 @@ in {
     ../../modules/system
     ../../modules/services
     ./hardware-configuration.nix
-    (import ../../modules/services/nginx { inherit systemSettings; })
   ];
 
   nix.distributedBuilds = true;

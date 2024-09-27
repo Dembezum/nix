@@ -11,4 +11,4 @@ let
     [ ./revproxy.nix ]
   else
     [ ];
-in { inherit (imports) revproxy webserver; }
+in { imports = imports; }

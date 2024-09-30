@@ -7,7 +7,7 @@ let
     [ ./webserver.nix ]
   else if systemSettings.host == "zumClust-SLA2" then
     [ ./webserver.nix ]
-  else if systemSettings.host == "revproxy" then
+  else if systemSettings.host == "zumClust-REV" then
     [ ./revproxy.nix ]
   else
     [ ];

@@ -28,7 +28,7 @@
       enX0 = {
         useDHCP = false;
         ipv4.addresses = [{
-          address = "10.0.40.100";
+          address = "10.0.40.200";
           prefixLength = 24;
         }];
       };

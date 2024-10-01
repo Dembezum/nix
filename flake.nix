@@ -15,14 +15,14 @@
     let
       systemSettings = {
         systemstate = "24.05";
-        host = "zumClust-REV";
+        host = "nixos";
         system = "x86_64-linux";
         hostname = "${systemSettings.host}";
       };
 
       userSettings = {
-        username = "zumClust-REV";
-        name = "zumClust-REV";
+        username = "nixos";
+        name = "nixos";
         editor = "nvim";
         term = "xterm-256color";
         terminal = "foot";

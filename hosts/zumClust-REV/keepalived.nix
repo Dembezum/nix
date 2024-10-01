@@ -15,7 +15,7 @@
           auth_pass 1234
         }
         virtual_ipaddress {
-          10.0.40.101
+          10.0.40.201
         }
       }
     '';

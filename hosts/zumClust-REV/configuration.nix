@@ -28,7 +28,7 @@
       enX0 = {
         useDHCP = false;
         ipv4.addresses = [{
-          address = "10.0.40.200";
+          address = "10.0.40.110";
           prefixLength = 24;
         }];
       };
@@ -57,9 +57,6 @@
     isNormalUser = true;
     initialPassword = "frysepizza";
     extraGroups = [ "docker" "plugdev" "libvirt" "networkmanager" "wheel" ];
-    openssh.authorizedKeys.keys = [''
-      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIObwpxQ2jEJLHmwx6hBHbhveBs7UWeM31JdUH7vkPcVM dembezuuma@gmail.com
-    ''];
     uid = 1000;
   };
 

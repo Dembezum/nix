@@ -8,12 +8,12 @@
     acceptTerms = true;
     defaults.email = "dembezuuma@gmail.com";
     certs = {
-      "reverseproxy.zumserve.com" = {
+      ".zumserve.com" = {
         webroot = "/var/lib/acme/challenges-reverseproxy";
         email = "dembezuuma@gmail.com";
         group = "nginx";
-        domain = "reverseproxy.zumserve.com";
-        extraDomainNames = [ "www.reverseproxy.zumserve.com" ];
+        domain = "zumserve.com";
+        extraDomainNames = [ "www.zumserve.com" ];
       };
     };
   };
@@ -24,10 +24,10 @@
     enable = true;
     logError = "stderr info";
     virtualHosts = {
-      "reverseproxy.zumserve.com" = {
+      "zumserve.com" = {
         addSSL = true;
-        useACMEHost = "reverseproxy.zumserve.com";
-        serverAliases = [ "*.reverseproxy.zumserve.com" ];
+        useACMEHost = "zumserve.com";
+        serverAliases = [ "*.zumserve.com" ];
         acmeRoot = "/var/lib/acme/challenges-reverseproxy";
         locations."/" = {
           proxyPass = "http://10.0.40.101:80";
@@ -55,9 +55,9 @@
         }];
       };
 
-      "reverseproxy.zumserve.com80" = {
-        serverName = "reverseproxy.zumserve.com";
-        serverAliases = [ "*.reverseproxy.zumserve.com" ];
+      "zumserve.com80" = {
+        serverName = "zumserve.com";
+        serverAliases = [ "*.zumserve.com" ];
         locations."/.well-known/acme-challenge" = {
           root = "/var/lib/acme/challenges-reverseproxy";
           extraConfig = ''

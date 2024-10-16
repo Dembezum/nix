@@ -8,7 +8,7 @@
     acceptTerms = true;
     defaults.email = "dembezuuma@gmail.com";
     certs = {
-      ".zumserve.com" = {
+      "zumserve.com" = {
         webroot = "/var/lib/acme/challenges-reverseproxy";
         email = "dembezuuma@gmail.com";
         group = "nginx";

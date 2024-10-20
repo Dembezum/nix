@@ -5,6 +5,7 @@
     #    ./containers
     ./nginx
     ./tailscale
+    ./rsyslog
 
   ];
 }

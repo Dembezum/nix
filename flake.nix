@@ -15,14 +15,14 @@
     let
       systemSettings = {
         systemstate = "24.05";
-        host = "nixos";
+        host = "ReuterVPN";
         system = "x86_64-linux";
         hostname = "${systemSettings.host}";
       };
 
       userSettings = {
-        username = "nixos";
-        name = "nixos";
+        username = "ReuterVPN";
+        name = "ReuterVPN";
         editor = "nvim";
         term = "xterm-256color";
         terminal = "foot";

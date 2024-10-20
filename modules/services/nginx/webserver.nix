@@ -27,8 +27,8 @@
   services.nginx = {
     enable = true;
     logError = "stderr info";
+    enableReload = true;
     virtualHosts = {
-
       "zumserve.com" = {
         addSSL = true;
         useACMEHost = "zumserve.com";
